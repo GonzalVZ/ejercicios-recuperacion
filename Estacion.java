@@ -39,6 +39,8 @@ public class Estacion {
 
         Estacion.listaMediciones.add(m);
 
+        sc.close();
+
     }
 
     public static void modificarMedicion() {
@@ -101,6 +103,7 @@ public class Estacion {
             numero = Integer.parseInt(sc.nextLine());
 
         }
+        sc.close();
 
     }
 
@@ -139,6 +142,7 @@ public class Estacion {
             numero = Integer.parseInt(sc.nextLine());
 
         }
+        sc.close();
 
     }
 
