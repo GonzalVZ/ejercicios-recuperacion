@@ -2,6 +2,8 @@ import java.util.*;
 
 public class Meteorologia {
 
+    static Estacion[] listaEstaciones = new Estacion[100];
+
     public static void main(String[] args) {
 
         Meteorologia.menuPrincipal();
@@ -11,6 +13,14 @@ public class Meteorologia {
         Scanner sc = new Scanner(System.in);
         int respuesta = 0;
         boolean centinela = false;
+
+        for (int i = 0; i < 3; i++) {
+
+            listaEstaciones[i] = new Estacion(i, "Estación Norte", "Bilbao", "Bizkaia");
+
+        }
+        listaEstaciones[99] = new Estacion(99, "Estación Norte", "Bilbao", "Bizkaia");
+        listaEstaciones[98] = new Estacion(98, "Estación Norte", "Bilbao", "Bizkaia");
 
         while (!centinela) {
             try {
@@ -52,10 +62,18 @@ public class Meteorologia {
     }
 
     public static void verListaEstaciones() {
-        Estacion e1 = new Estacion(1, "Estación Norte", "Bilbao", "Bizkaia");
-        Estacion e2 = new Estacion(e1);
 
-        System.out.println(e1 + "\n" + e2);
+        for (int i = 0; i < listaEstaciones.length; i++) {
+
+            if (listaEstaciones[i] == null) {
+                System.out.println("Vacio" + "\n");
+
+            } else {
+                System.out
+                        .println(listaEstaciones[i].toString() + "\n");
+            }
+
+        }
 
     }
 
