@@ -4,9 +4,9 @@ public class Meteorologia {
 
     Estacion[] listaEstaciones = new Estacion[100];
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
 
-        Meteorologia.menuPrincipal();
+        menuPrincipal();
     }
 
     public static void estadisticas() {
@@ -60,7 +60,7 @@ public class Meteorologia {
 
     }
 
-    public static void menuPrincipal() {
+    public void menuPrincipal() {
         Scanner sc = new Scanner(System.in);
         int respuesta = 1;
         boolean centinela = false;

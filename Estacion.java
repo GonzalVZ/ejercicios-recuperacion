@@ -18,7 +18,7 @@ public class Estacion {
 
     }
 
-    public static void modificarMedicion() {
+    public void modificarMedicion() {
         Scanner sc = new Scanner(System.in);
         int numero = 1;
 
