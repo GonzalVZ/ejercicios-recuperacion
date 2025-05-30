@@ -2,11 +2,62 @@ import java.util.*;
 
 public class Meteorologia {
 
-    static Estacion[] listaEstaciones = new Estacion[100];
+    Estacion[] listaEstaciones = new Estacion[100];
 
     public static void main(String[] args) {
 
         Meteorologia.menuPrincipal();
+    }
+
+    public static void estadisticas() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Escribe el ID de la estación: ");
+        int idEstacion = Integer.parseInt(sc.nextLine());
+
+        System.out.print("Escribe el ID de la estación: ");
+        String fechaInicio = sc.nextLine();
+
+        System.out.print("Escribe el ID de la estación: ");
+        String fechaFin = sc.nextLine();
+
+        for (int i = 0; i < Meteorologia.listaEstaciones.length; i++) {
+
+            if (Meteorologia.listaEstaciones[i] == null) {
+
+            } else if (Meteorologia.listaEstaciones[i].getId() == idEstacion) {
+                System.out
+                        .println(Meteorologia.listaEstaciones[i].toString() + "\n");
+
+            }
+
+        }
+        double temperaturaMaxima = 0;
+        double temperaturaMinima = 0;
+        double temperaturaMedia;
+        double precipitacionMaxima;
+        double precipitacionMinima;
+        double precipitacionTotal;
+        double humedadMaxima;
+        double humedadMinima;
+        double humedadMedia;
+
+        for (int i = 0; i < Estacion.listaMediciones.size(); i++) {
+
+            if (Estacion.listaMediciones.get(i).getIdEstacion() == idEstacion) {
+                if (temperaturaMaxima < Estacion.listaMediciones.get(i).getTemperatura()) {
+
+                    temperaturaMaxima = Estacion.listaMediciones.get(i).getTemperatura();
+
+                }
+                if (temperaturaMinima > Estacion.listaMediciones.get(i).get) {
+
+                    temperaturaMinima = Estacion.listaMediciones.get(i).getTemperatura();
+
+                }
+            }
+        }
+
     }
 
     public static void menuPrincipal() {
@@ -49,7 +100,7 @@ public class Meteorologia {
                     break;
 
                 case 3:
-                    Estacion.agregarMedicion();
+                    agregarMedicion();
                     break;
 
                 case 4:
@@ -107,6 +158,53 @@ public class Meteorologia {
         }
         sc.close();
 
+    }
+
+    public void agregarMedicion() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Escribe el ID de la estación: ");
+        int idEstacion = Integer.parseInt(sc.nextLine());
+        System.out.print("Escribe el ID de la medicion: ");
+        int id = Integer.parseInt(sc.nextLine());
+
+        System.out.print("Escribe la fecha (YYYY-MM-DD): ");
+        String fecha = sc.nextLine();
+
+        System.out.print("Escribe la hora (HH:MM): ");
+        String hora = sc.nextLine();
+
+        System.out.print("Escribe la temperatura: ");
+        double temperatura = Double.parseDouble(sc.nextLine());
+
+        System.out.print("Escribe la precipitación: ");
+        double precipitacion = Double.parseDouble(sc.nextLine());
+
+        System.out.print("Escribe la presión: ");
+        double presion = Double.parseDouble(sc.nextLine());
+
+        System.out.print("Escribe la humedad: ");
+        double humedad = Double.parseDouble(sc.nextLine());
+        Estacion e = encontrarEstacion(idEstacion);
+        e.agregarMedicion(id, idEstacion, fecha, hora, temperatura,
+                precipitacion, presion, humedad);
+
+        sc.close();
+
+    }
+
+    public Estacion encontrarEstacion(int idEstacion) {
+        for (int i = 0; i < listaEstaciones.length; i++) {
+
+            if (listaEstaciones[i] == null) {
+
+            } else if (listaEstaciones[i].getId() == idEstacion) {
+                return listaEstaciones[i];
+
+            }
+
+        }
+        return null;
     }
 
 }

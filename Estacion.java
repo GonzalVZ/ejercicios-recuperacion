@@ -6,40 +6,15 @@ public class Estacion {
     private String poblacion;
     private String provincia;
 
-    static List<Medicion> listaMediciones = new ArrayList<>();
+    List<Medicion> listaMediciones = new ArrayList<>();
 
-    public static void agregarMedicion() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Escribe el ID de la estación: ");
-        int idEstacion = Integer.parseInt(sc.nextLine());
-        System.out.print("Escribe el ID de la medicion: ");
-        int id = Integer.parseInt(sc.nextLine());
-
-        System.out.print("Escribe la fecha (YYYY-MM-DD): ");
-        String fecha = sc.nextLine();
-
-        System.out.print("Escribe la hora (HH:MM): ");
-        String hora = sc.nextLine();
-
-        System.out.print("Escribe la temperatura: ");
-        double temperatura = Double.parseDouble(sc.nextLine());
-
-        System.out.print("Escribe la precipitación: ");
-        double precipitacion = Double.parseDouble(sc.nextLine());
-
-        System.out.print("Escribe la presión: ");
-        double presion = Double.parseDouble(sc.nextLine());
-
-        System.out.print("Escribe la humedad: ");
-        double humedad = Double.parseDouble(sc.nextLine());
+    public void agregarMedicion(int id, int idEstacion, String fecha, String hora, double temperatura,
+            double precipitacion, double presion, double humedad) {
 
         Medicion m = new Medicion(id, idEstacion, fecha, hora, temperatura, precipitacion, presion,
                 humedad);
 
-        Estacion.listaMediciones.add(m);
-
-        sc.close();
+        listaMediciones.add(m);
 
     }
 
