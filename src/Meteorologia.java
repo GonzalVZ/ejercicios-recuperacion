@@ -1,13 +1,16 @@
 package src;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.*;
 
 public class Meteorologia {
 
-    public static Estacion[] listaEstaciones = new Estacion[100];
+    public static Estacion[] listaEstaciones = new Estacion[1];
 
     public static void main(String[] args) {
-
         Meteorologia.menuPrincipal();
     }
 
@@ -17,6 +20,7 @@ public class Meteorologia {
         boolean centinela = false;
 
         Meteorologia.rellenarDatosPrueba();
+        Meteorologia.escribirFichero();
         while (respuesta != 0) {
 
             while (!centinela) {
@@ -233,4 +237,51 @@ public class Meteorologia {
         e.estadisticas(fechaInicio, fechaFin);
 
     }
+
+    public static void escribirFichero() {
+
+        try {
+            FileWriter fw = new FileWriter("estaciones.txt", true);
+
+            for (int i = 0; i < listaEstaciones.length; i++) {
+
+                fw.write(listaEstaciones[i].getNombre() + ";" + listaEstaciones[i].getPoblacion() + ";"
+                        + listaEstaciones[i].getProvincia() + "\n");
+                System.out.println(listaEstaciones[i].getNombre() + ";" + listaEstaciones[i].getPoblacion() + ";"
+                        + listaEstaciones[i].getProvincia() + "\n");
+            }
+            fw.close();
+
+        } catch (Exception e) {
+
+            System.out.println("Error");
+        }
+
+    }
+
+    public static void cargarFichero() {
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("estaciones.txt"));
+            String linea;
+
+            while ((linea = br.readLine()) != null) {
+
+                for (int i = 0; i < linea.length(); i++) {
+
+                    Meteorologia.listaEstaciones[]
+
+                }
+
+            }
+
+            fw.close();
+
+        } catch (Exception e) {
+
+            System.out.println("Error");
+        }
+
+    }
+
 }
