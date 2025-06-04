@@ -73,13 +73,13 @@ public class Meteorologia {
                     break;
                 case 9:
                     System.out.println("De que estacion quieres que escriba en el fichero sus Mediciones");
-                    int r = sc.nextInt();
+                    int r = Integer.parseInt(sc.nextLine());
                     listaEstaciones[r].escribirMediciones();
                     break;
                 case 10:
                     System.out.println("De que estacion quieres que cargue los datos de las Mediciones ");
 
-                    r = sc.nextInt();
+                    r = Integer.parseInt(sc.nextLine());
 
                     listaEstaciones[r].cargarMediciones();
                     break;
