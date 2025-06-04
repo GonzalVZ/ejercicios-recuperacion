@@ -1,5 +1,6 @@
 package src;
 
+import java.io.*;
 import java.util.*;
 
 public class Estacion {
@@ -9,6 +10,46 @@ public class Estacion {
     private String provincia;
 
     public List<Medicion> listaMediciones = new ArrayList<>();
+
+    public void escribirMediciones() {
+
+        try {
+
+            FileOutputStream fos = new FileOutputStream("mediciones.data");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            for (Medicion m : listaMediciones) {
+
+                oos.writeObject(m);
+            }
+
+            oos.close();
+            fos.close();
+
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+
+    }
+
+    public void cargarMediciones() {
+        listaMediciones.clear();
+        try {
+            FileInputStream fis = new FileInputStream("mediciones.data");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            while (true) {
+
+                Medicion m = (Medicion) ois.readObject();
+
+                listaMediciones.add(m);
+
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+    }
 
     public int fechaParse(String fecha) {
 

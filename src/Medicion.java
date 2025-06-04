@@ -1,6 +1,8 @@
 package src;
 
-public class Medicion {
+import java.io.Serializable;
+
+public class Medicion implements Serializable {
     private int id;
     private int idEstacion;
     private String fecha;

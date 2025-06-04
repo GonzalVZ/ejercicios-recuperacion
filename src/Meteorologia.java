@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Meteorologia {
 
-    public static Estacion[] listaEstaciones = new Estacion[1];
+    public static Estacion[] listaEstaciones = new Estacion[5];
 
     public static void main(String[] args) {
         Meteorologia.menuPrincipal();
@@ -21,6 +21,9 @@ public class Meteorologia {
 
         Meteorologia.rellenarDatosPrueba();
         Meteorologia.escribirFichero();
+        listaEstaciones[0].escribirMediciones();
+        listaEstaciones[0].cargarMediciones();
+
         while (respuesta != 0) {
 
             while (!centinela) {
@@ -31,7 +34,7 @@ public class Meteorologia {
 
                     centinela = true;
 
-                    if (respuesta < 0 || respuesta > 6) {
+                    if (respuesta < 0 || respuesta > 7) {
                         centinela = false;
                         System.out.println("El numero tiene que ser entre 0-6");
                     }
@@ -66,6 +69,11 @@ public class Meteorologia {
                 case 6:
                     Meteorologia.estadisticas();
                     break;
+                case 7:
+
+                    Meteorologia.cargarFichero();
+                    break;
+
                 case 0:
                     System.out.println("Fin del programa");
                     break;
@@ -245,6 +253,11 @@ public class Meteorologia {
 
             for (int i = 0; i < listaEstaciones.length; i++) {
 
+                if (listaEstaciones[i] == null) {
+                    break;
+
+                }
+
                 fw.write(listaEstaciones[i].getNombre() + ";" + listaEstaciones[i].getPoblacion() + ";"
                         + listaEstaciones[i].getProvincia() + "\n");
                 System.out.println(listaEstaciones[i].getNombre() + ";" + listaEstaciones[i].getPoblacion() + ";"
@@ -260,22 +273,55 @@ public class Meteorologia {
     }
 
     public static void cargarFichero() {
+        String linea;
+        int contador = 0;
+        String palabra = "";
+        char letra;
+        int contador1 = 0;
 
         try {
             BufferedReader br = new BufferedReader(new FileReader("estaciones.txt"));
-            String linea;
 
             while ((linea = br.readLine()) != null) {
 
-                for (int i = 0; i < linea.length(); i++) {
+                Estacion e = new Estacion();
 
-                    Meteorologia.listaEstaciones[]
+                for (int i = 0; i < linea.length(); i++) {
+                    letra = linea.charAt(i);
+
+                    if (letra == ';') {
+
+                        palabra = "";
+                        contador++;
+
+                    } else if (contador == 0) {
+                        palabra = palabra + letra;
+
+                        e.setNombre(palabra);
+                        Meteorologia.listaEstaciones[contador1] = e;
+
+                    } else if (contador == 1) {
+                        palabra = palabra + letra;
+                        e.setPoblacion(palabra);
+                        Meteorologia.listaEstaciones[contador1] = e;
+
+                    } else if (contador == 2) {
+                        palabra = palabra + letra;
+                        e.setProvincia(palabra);
+
+                        Meteorologia.listaEstaciones[contador1] = e;
+
+                    }
 
                 }
+                e.setId(contador1);
+                palabra = "";
+                contador = 0;
+                contador1++;
 
             }
 
-            fw.close();
+            br.close();
 
         } catch (Exception e) {
 
