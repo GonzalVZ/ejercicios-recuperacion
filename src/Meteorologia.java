@@ -1,9 +1,6 @@
 package src;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.*;
 
 public class Meteorologia {
@@ -20,21 +17,18 @@ public class Meteorologia {
         boolean centinela = false;
 
         Meteorologia.rellenarDatosPrueba();
-        Meteorologia.escribirFichero();
-        listaEstaciones[0].escribirMediciones();
-        listaEstaciones[0].cargarMediciones();
 
         while (respuesta != 0) {
 
             while (!centinela) {
                 try {
                     System.out.println(
-                            " 1. Ver lista de estaciones \n 2. Ver lista de mediciones \n 3. Añadir medición \n 4. Borrar medición \n 5. Modificar medición \n 6. Estadísticas \n 0. Salir \n ¿Qué desea hacer? (0-6) _");
+                            " 1. Ver lista de estaciones \n 2. Ver lista de mediciones \n 3. Añadir medición \n 4. Borrar medición \n 5. Modificar medición \n 6. Estadísticas \n 7.Escribir Estaciones en el fichero \n 8.Cargar Estaciones del fichero\n 9.Escribir Mediciones en el fichero\n 10.Cargar Mediciones del fichero\n 0. Salir \n ¿Qué desea hacer? (0-6) _");
                     respuesta = Integer.parseInt(sc.nextLine());
 
                     centinela = true;
 
-                    if (respuesta < 0 || respuesta > 7) {
+                    if (respuesta < 0 || respuesta > 10) {
                         centinela = false;
                         System.out.println("El numero tiene que ser entre 0-6");
                     }
@@ -71,7 +65,23 @@ public class Meteorologia {
                     break;
                 case 7:
 
+                    Meteorologia.escribirFichero();
+                    break;
+                case 8:
+
                     Meteorologia.cargarFichero();
+                    break;
+                case 9:
+                    System.out.println("De que estacion quieres que escriba en el fichero sus Mediciones");
+                    int r = sc.nextInt();
+                    listaEstaciones[r].escribirMediciones();
+                    break;
+                case 10:
+                    System.out.println("De que estacion quieres que cargue los datos de las Mediciones ");
+
+                    r = sc.nextInt();
+
+                    listaEstaciones[r].cargarMediciones();
                     break;
 
                 case 0:
@@ -249,7 +259,7 @@ public class Meteorologia {
     public static void escribirFichero() {
 
         try {
-            FileWriter fw = new FileWriter("estaciones.txt", true);
+            FileWriter fw = new FileWriter("estaciones.csv");
 
             for (int i = 0; i < listaEstaciones.length; i++) {
 
@@ -260,8 +270,7 @@ public class Meteorologia {
 
                 fw.write(listaEstaciones[i].getNombre() + ";" + listaEstaciones[i].getPoblacion() + ";"
                         + listaEstaciones[i].getProvincia() + "\n");
-                System.out.println(listaEstaciones[i].getNombre() + ";" + listaEstaciones[i].getPoblacion() + ";"
-                        + listaEstaciones[i].getProvincia() + "\n");
+
             }
             fw.close();
 
@@ -280,7 +289,7 @@ public class Meteorologia {
         int contador1 = 0;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("estaciones.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("estaciones.csv"));
 
             while ((linea = br.readLine()) != null) {
 
