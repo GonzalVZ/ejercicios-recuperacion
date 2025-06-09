@@ -27,33 +27,35 @@ public class Estacion {
             fos.close();
 
         } catch (Exception e) {
-            System.out.println("Error");
+           System.out.println("Error");        
         }
 
     }
 
-    public void cargarMediciones() {
-        listaMediciones.clear();
-        try {
-            FileInputStream fis = new FileInputStream("mediciones.data");
-            ObjectInputStream ois = new ObjectInputStream(fis);
+   public void cargarMediciones() {
+    listaMediciones.clear();
 
-            while (true) {
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("mediciones.data"))) {
 
+        while (true) {
+            try {
                 Medicion m = (Medicion) ois.readObject();
-
                 listaMediciones.add(m);
-
+            } catch (EOFException eof) {
+                break; 
             }
-        } catch (Exception e) {
-            // TODO: handle exception
         }
 
+    } catch (IOException | ClassNotFoundException e) {
+        System.out.println("Error al cargar mediciones:");
+        e.printStackTrace();
     }
+}
+
 
     public int fechaParse(String fecha) {
 
-        int fechaParseada = Integer.parseInt(fecha.substring(8, 10));
+        int fechaParseada = Integer.parseInt(fecha.substring(0, 2));
 
         return fechaParseada;
     }

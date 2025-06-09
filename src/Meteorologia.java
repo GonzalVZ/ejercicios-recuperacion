@@ -30,7 +30,7 @@ public class Meteorologia {
 
                     if (respuesta < 0 || respuesta > 10) {
                         centinela = false;
-                        System.out.println("El numero tiene que ser entre 0-6");
+                        System.out.println("El numero tiene que ser entre 0-10");
                     }
 
                 } catch (Exception e) {
@@ -72,12 +72,13 @@ public class Meteorologia {
                     Meteorologia.cargarFichero();
                     break;
                 case 9:
-                    System.out.println("De que estacion quieres que escriba en el fichero sus Mediciones");
+                    System.out.println("Indice de Estacion");
                     int r = Integer.parseInt(sc.nextLine());
                     listaEstaciones[r].escribirMediciones();
                     break;
                 case 10:
-                    System.out.println("De que estacion quieres que cargue los datos de las Mediciones ");
+
+                    System.out.println("Indice de Estacion");
 
                     r = Integer.parseInt(sc.nextLine());
 
@@ -96,16 +97,16 @@ public class Meteorologia {
     public static void rellenarDatosPrueba() {
         Estacion e = new Estacion(1, "Estación Prueba", "PruebaCiudad", "PruebaProvincia");
 
-        e.agregarMedicion(1, 1, "2025-05-21", "10:00", 20.5, 0.5, 1010, 60);
-        e.agregarMedicion(2, 1, "2025-05-22", "11:00", 22.0, 0.0, 1012, 65);
-        e.agregarMedicion(3, 1, "2025-05-23", "12:00", 24.0, 1.0, 1015, 70);
-        e.agregarMedicion(4, 1, "2025-05-24", "13:00", 25.5, 0.3, 1013, 72);
-        e.agregarMedicion(5, 1, "2025-05-25", "14:00", 23.5, 0.0, 1011, 68);
-        e.agregarMedicion(6, 1, "2025-05-26", "15:00", 21.0, 0.7, 1009, 66);
-        e.agregarMedicion(7, 1, "2025-05-27", "16:00", 26.0, 1.2, 1008, 75);
-        e.agregarMedicion(8, 1, "2025-05-28", "17:00", 27.5, 0.0, 1007, 80);
-        e.agregarMedicion(9, 1, "2025-05-29", "18:00", 28.0, 0.0, 1005, 78);
-        e.agregarMedicion(10, 1, "2025-05-30", "19:00", 24.5, 0.4, 1006, 70);
+        e.agregarMedicion(1, 1, "21", "10:00", 20.5, 0.5, 1010, 60);
+        e.agregarMedicion(2, 1, "22", "11:00", 22.0, 0.0, 1012, 65);
+        e.agregarMedicion(3, 1, "23", "12:00", 24.0, 1.0, 1015, 70);
+        e.agregarMedicion(4, 1, "24", "13:00", 25.5, 0.3, 1013, 72);
+        e.agregarMedicion(5, 1, "25", "14:00", 23.5, 0.0, 1011, 68);
+        e.agregarMedicion(6, 1, "26", "15:00", 21.0, 0.7, 1009, 66);
+        e.agregarMedicion(7, 1, "27", "16:00", 26.0, 1.2, 1008, 75);
+        e.agregarMedicion(8, 1, "28", "17:00", 27.5, 0.0, 1007, 80);
+        e.agregarMedicion(9, 1, "29", "18:00", 28.0, 0.0, 1005, 78);
+        e.agregarMedicion(10, 1, "30", "19:00", 24.5, 0.4, 1006, 70);
 
         listaEstaciones[0] = e;
 
@@ -323,7 +324,7 @@ public class Meteorologia {
                     }
 
                 }
-                e.setId(contador1);
+                e.setId(contador1 + 1);
                 palabra = "";
                 contador = 0;
                 contador1++;
